@@ -154,7 +154,7 @@ function Home(){
 
     // State variables to display login page stuff and hold login information
     const [show, setShow] = useState(false)
-    const [loggedIn, setStatus] = useState(true)
+    const [loggedIn, setStatus] = useState(false)
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('')
     const [passcode, setPasscode] = useState('')
