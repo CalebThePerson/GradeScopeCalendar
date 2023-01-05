@@ -6,7 +6,8 @@ import '../style/LoginPage.css'
 require('cors')
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 export default function LoginPage(){
@@ -17,7 +18,13 @@ export default function LoginPage(){
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [logedIn, setStatus] = useState(false)
-    const [loginMethod, setMethod] = useState('normalLogin')
+    const [loginMethod, setMethod] = useState('1')
+
+    const methods= [
+        {name: "normalLogin", value:"1"},
+        {name: "duoAuth", value:'2'}
+    ]
+    
 
     //UseState functions
     //Functions that update our useState variables
@@ -29,8 +36,8 @@ export default function LoginPage(){
     }
 
     const changeLoginMethod = (event, method) => {
-        console.log(method)
-        setMethod(method)
+        console.log(event.target.value)
+        setMethod(event.target.value)
     }
 
 
@@ -41,9 +48,8 @@ export default function LoginPage(){
     //React Functions and etc
     
     //This is rendered if the user isn't logged in
-    console.log(loginMethod)
     if(!logedIn){
-        if(loginMethod == 'normalLogin'){
+        if(loginMethod == '1'){
             return(
                 <body id = "bodyBackground">
                     <header>
@@ -66,6 +72,12 @@ export default function LoginPage(){
                                         <Form.Label class = "innerSquareText">Password: </Form.Label>
                                         <Form.Control class = "innerFormText" type="email" placeholder="Enter password" onChange = {changePassword}></Form.Control>
                                 </Form.Group>
+                                <ButtonGroup className="mb-2">
+                                    {methods.map((method,idx) => (
+                                        <ToggleButton key = {idx} id={`radio-${idx}`} type ='radio'variant={idx % 2 ? 'outline-success' : 'outline-danger'} name="radio" value={method.value} checked={loginMethod === method.value} onChange = {changeLoginMethod}>{method.name}</ToggleButton>
+                                    ))}
+                                </ButtonGroup>
+
                                 <div>
                                     <Button id = "buttonText" variant="primary" type="submit">Login</Button>
                                 </div>
@@ -75,13 +87,13 @@ export default function LoginPage(){
                     </div>
                 </body>
             )
-        } else{
+        } else{ 
             return(
                 <body id = "bodyBackground">
                     <header>
                         <h1 id = 'headerText'>GradeScope Calendar</h1>
                     </header>
-    
+        
                     <div id = "mainContent">
                         <div id = "contentWrapper">
                             <h1 class = "text">Welcome!</h1>
@@ -89,22 +101,22 @@ export default function LoginPage(){
                             <div id = "formSquare">
                                 <Form>
                                     <Form.Group class = "mainGroup">
-                                        <Form.Label class = "innerSquareText">Username: </Form.Label>
-                                        <Form.Control class = "innerFormText" type="email" placeholder = "Enter email"></Form.Control>
+                                        <Form.Label class = "innerSquareText">Email Adress: </Form.Label>
+                                        <Form.Control class = "innerFormText" type="email" placeholder = "Enter email"  onChange = {changeEmail}></Form.Control>
+                                        <Form.Text className = 'text-muted'>This is your HMC credentials</Form.Text>
                                     </Form.Group>
-
+        
                                     
                                 <Form.Group class = "mainGroup">
                                         <Form.Label class = "innerSquareText">Password: </Form.Label>
-                                        <Form.Control class = "innerFormText" type="email" placeholder="Enter password"></Form.Control>
+                                        <Form.Control class = "innerFormText" type="email" placeholder="Enter password" onChange = {changePassword}></Form.Control>
                                 </Form.Group>
-                                <div class = "btn-group" role="group" aria-label="Basic Checkbox toggle button group">
-                                    <input type ="checkbox" class="btn-check" id="btncheck1" autocomplete="off"></input>
-                                    <label class = "btn btn-outline-primary" for="btncheck1">Normal Login</label>
-
-                                    <input type ="checkbox" class="btn-check" id="btncheck2" autocomplete="off"></input>
-                                    <label class = "btn btn-outline-primary" for="btncheck2">DuoAuth</label>
-                                </div>
+                                <ButtonGroup className="mb-2">
+                                    {methods.map((method,idx) => (
+                                        <ToggleButton key = {idx} id={`radio-${idx}`} type ='radio'variant={idx % 2 ? 'outline-success' : 'outline-danger'} name="radio" value={method.value} checked={loginMethod === method.value} onChange = {changeLoginMethod}>{method.name}</ToggleButton>
+                                    ))}
+                                </ButtonGroup>
+        
                                 <div>
                                     <Button id = "buttonText" variant="primary" type="submit">Login</Button>
                                 </div>
@@ -113,7 +125,7 @@ export default function LoginPage(){
                         </div> 
                     </div>
                 </body>
-            )
+                )
         }
     }else{
     }
