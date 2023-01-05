@@ -15,7 +15,7 @@ require('cors')
 // Variables to store information about the current day, week, month, and year
 // Note: To manually change the current day for testing or debugging, you can enter your own year, numerical month, and day as
 // new Date( year_num, month_num-1, date)
-let current = new Date(2022, 2, 2),
+let current = new Date(2022, 10, 2),
     date = current.getDate(), day = current.getDay(),
     month_num = current.getMonth()+1, year = current.getFullYear(),
     current_wk_start = date-day, numDayInMonth = new Date(year, month_num, 0).getDate(),
@@ -153,8 +153,8 @@ function Home(){
 // _____________________________login stuff & scraping async functions______________________________//
 
     // State variables to display login page stuff and hold login information
-    const [show, setShow] = useState(false)
-    const [loggedIn, setStatus] = useState(false)
+    const [show, setShow] = useState(true)
+    const [loggedIn, setStatus] = useState(true)
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('')
     const [passcode, setPasscode] = useState('')

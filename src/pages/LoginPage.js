@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import Home from './Home.js'
 
 
 export default function LoginPage(){
@@ -34,19 +35,21 @@ export default function LoginPage(){
     const changePassword = (event) =>{
         setPassword(event.target.value)
     }
-
     const changeLoginMethod = (event, method) => {
         console.log(event.target.value)
         setMethod(event.target.value)
     }
-
-
-
     //API Functions
     //The Functions that talk to the api and log our users in
+    async function login(event){
+        console.log('Logging in')
+        event.preventDefault()
+        const message = await axios(`http://localhost:3001/login?email=${email}&pass=${password}`)
+        console.log(message)
+        setStatus(true)
+    }
 
     //React Functions and etc
-    
     //This is rendered if the user isn't logged in
     if(!logedIn){
         if(loginMethod == '1'){
@@ -70,7 +73,7 @@ export default function LoginPage(){
                                     
                                 <Form.Group class = "mainGroup">
                                         <Form.Label class = "innerSquareText">Password: </Form.Label>
-                                        <Form.Control class = "innerFormText" type="email" placeholder="Enter password" onChange = {changePassword}></Form.Control>
+                                        <Form.Control class = "innerFormText" type="password" placeholder="Enter password" onChange = {changePassword}></Form.Control>
                                 </Form.Group>
                                 <ButtonGroup className="mb-2">
                                     {methods.map((method,idx) => (
@@ -79,7 +82,7 @@ export default function LoginPage(){
                                 </ButtonGroup>
 
                                 <div>
-                                    <Button id = "buttonText" variant="primary" type="submit">Login</Button>
+                                    <Button id = "buttonText" variant="primary" type="submit" onClick={login}>Login</Button>
                                 </div>
                                 </Form>
                             </div>
@@ -109,16 +112,15 @@ export default function LoginPage(){
                                     
                                 <Form.Group class = "mainGroup">
                                         <Form.Label class = "innerSquareText">Password: </Form.Label>
-                                        <Form.Control class = "innerFormText" type="email" placeholder="Enter password" onChange = {changePassword}></Form.Control>
+                                        <Form.Control class = "innerFormText" type="password" placeholder="Enter password" onChange = {changePassword}></Form.Control>
                                 </Form.Group>
                                 <ButtonGroup className="mb-2">
                                     {methods.map((method,idx) => (
                                         <ToggleButton key = {idx} id={`radio-${idx}`} type ='radio'variant={idx % 2 ? 'outline-success' : 'outline-danger'} name="radio" value={method.value} checked={loginMethod === method.value} onChange = {changeLoginMethod}>{method.name}</ToggleButton>
                                     ))}
                                 </ButtonGroup>
-        
                                 <div>
-                                    <Button id = "buttonText" variant="primary" type="submit">Login</Button>
+                                    <Button id = "buttonText" variant="primary" type="submit" onClick={login}>Login</Button>
                                 </div>
                                 </Form>
                             </div>
@@ -128,5 +130,8 @@ export default function LoginPage(){
                 )
         }
     }else{
+        return(
+        <Home></Home>
+        )
     }
 }
