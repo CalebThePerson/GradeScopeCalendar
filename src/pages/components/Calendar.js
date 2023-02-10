@@ -107,6 +107,8 @@ function Calendar(props){
 
     function generateAssignArrSimple(){
         let retArr = []
+
+        //Some homework assignemtns is being filtered out here
         if (props.assignments.length > 0){
             let monthBefore = (props.current_wk_start <= 0?
                 (props.month_num-1 <= 0) ?
@@ -125,16 +127,21 @@ function Calendar(props){
                 return (monthStr == props.num_to_month(props.month_num, true) || monthStr == props.num_to_month(monthBefore, true) || monthStr == props.num_to_month(monthAfter, true)
                     || (month_to_num(monthStr) >= monthBefore && month_to_num(monthStr) <= monthAfter) )
             }
+            console.log(props.assignments)
             let filteredArr = [];
             props.assignments.map((c) => {
                 let filteredCArr = [];
                 for (let i=0; i < c.length; i++){
                     const mon = c[i].dueData.substring(0,3);
+                    console.log(c[i].course)
+                    if(c[i] == "Intro: Probability &amp; Statistics"){ 
+                        console.log(mon)
+                        console.log(isInUpcoming(mon))
+                    }
                     if(isInUpcoming(mon)){
                         filteredCArr.push(c[i])
                     }
                     else if (month_to_num(mon) < monthBefore){
-                        break;
                     }
                 }
                 filteredArr.push(filteredCArr)
@@ -171,6 +178,7 @@ function Calendar(props){
             })
             console.log(calArr)
             props.getAnAssignArray(calArr)
+            // console.log(retArr)
         }
         return retArr
     }

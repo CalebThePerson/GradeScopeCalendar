@@ -1,14 +1,14 @@
+import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import cheerio from 'cheerio'
 import {useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 import '../style/LoginPage.css'
-require('cors')
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Home from './Home.js'
+require('cors')
 
 
 export default function LoginPage(){
