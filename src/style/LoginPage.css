@@ -1,0 +1,89 @@
+/* CSS for the body */
+#bodyBackground{
+    background-color: #46c7c4;
+}
+
+/* Header CSS */
+header{
+    height: 7.375rem;
+    background-color: #46c7c4;
+    align-items: center;
+
+}
+
+#headerText{
+    color: white;
+    padding: 1%;
+    font-weight: bold;
+    font-family: "Anonymous Pro" !important;
+
+}
+
+/* CSS for the form square and etc */
+#mainContent{
+    /* ParentDiv  1800 118*/
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #03a3a1;
+    align-items: center;
+}
+
+#contentWrapper{
+    align-items: center;
+    text-align: center;
+}
+
+#formSquare{
+    /* Child */
+    background-color: white;
+    height:30rem;
+    width: 34.75rem;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 auto; 
+    border-radius: 5%;
+}
+
+.mainGroup{
+    text-align: left;
+    padding: 5%;
+}
+
+Form{
+    padding: 5%;
+}
+
+.formCSS{
+    padding: 10%;
+}
+
+.btn-group{
+    padding-bottom: 3%;
+}
+
+/* CSS for text */
+.text, h1 {
+    color: white;
+    font-size: 2.9375em;
+}
+
+h2{
+    color: white;
+    font-size: 1.4em;
+}
+
+.innerSquareText{
+    color: #03a3a1;
+    font-size: 1.6375em;
+    font-weight: bold;
+}
+
+.innerFormText{
+    font-family: inherit;
+}
+
+#buttonText{
+    font-size: 1.6125rem;
+    font-weight: bold;
+}
