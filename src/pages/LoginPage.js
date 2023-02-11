@@ -47,15 +47,15 @@ export default function LoginPage(){
         if (loginMethod == "1") {
             const message = await axios(`http://localhost:3001/login?email=${email}&pass=${password}`)
             if (message != "Successfully logged in"){
-                setStatus(true)
                 console.log(message)
             }
         } else{
             const message = await axios(`http://localhost:3001/altlogin?email=${email}&pass=${password}`)
             if (message != "Successfully logged in"){
-                setStatus(true)
                 console.log(message)
-            }        }
+            }        
+        }
+        setStatus(true)
     }
 
     //React Functions and etc
