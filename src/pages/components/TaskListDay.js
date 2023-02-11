@@ -1,3 +1,6 @@
+const headerUpdate = {
+    color: "black"
+}
 
 // Given a day of the week, returns a corresponding number
 function day_to_num(d){
@@ -79,7 +82,7 @@ function TaskListDay(props){
 
     return(
         <div className={"mx-2 mx-sm-3 mt-1 mb-2 task_day_entry"}>
-            <h2 className={"fs-3 td_day"}>{props.dayOfWeek}</h2>
+            <h2 className={"fs-3 td_day"} style={headerUpdate}>{props.dayOfWeek}</h2>
             <ul className={"mb-5 " + listType}>
                 {displayDue}
                 {(props.assignments.length <= 0) && <li>none!</li>}
