@@ -323,10 +323,10 @@ function Home(){
     }
 
     // Gets user's scraped class information from Gradescope
-    async function pullUser(classArr){
-        const classData = await axios('http://localhost:3001/get_user?c=' + classArr[0].number)
-        const parsedName = await parseUser(classData['data'])
-        //setUName(parsedName)
+    async function pullUser(){
+        const userData = await axios('http://localhost:3001/get_name')
+        const parsedName = await parseUser(userData['data'])
+        setUName(parsedName)
         return parsedName;
     }
 
@@ -339,6 +339,7 @@ function Home(){
 
         const username = $('#user_name').val();
         //This removes the last entry because the last entry is always the add courses box in gradescope
+        console.log(username)
         return username;
     }
 
@@ -636,9 +637,9 @@ function Home(){
         if (loggedIn && classes.length == 0){
             const classes = async () => {
                 await sleep(2000)
+                const userName = await pullUser();
                 const classes = await pullClasses();
                 const assigns = await getAssignments(classes)
-                // const userName = await pullUser(classes);
             }
             // call the function
             const classArr = classes()
