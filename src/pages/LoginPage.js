@@ -44,7 +44,7 @@ export default function LoginPage(){
     async function login(event){
         console.log('Logging in')
         event.preventDefault()
-        if (loginMethod == "normalLogin") {
+        if (loginMethod == "1") {
             const message = await axios(`http://localhost:3001/login?email=${email}&pass=${password}`)
             if (message != "Successfully logged in"){
                 setStatus(true)
