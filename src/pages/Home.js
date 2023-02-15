@@ -209,7 +209,7 @@ function Home(){
         const element = document.getElementById("login_status_text");
         element.innerHTML = "Logging in... (be on the lookout for a duo notification!)"
         try{
-            const message = await axios('http://localhost:3001/login?email=' + user + '&pass=' + password + '&passcode=' + pcode + '&sc=' + sc);
+            const message = await axios('https://gscbackend.herokuapp.com/login?email=' + user + '&pass=' + password + '&passcode=' + pcode + '&sc=' + sc);
             if (message.data == "Successfully logged in"){
                 setShow(true)
                 setStatus(true)
@@ -229,7 +229,7 @@ function Home(){
 
     // Gets user's scraped class information from Gradescope
     async function pullClasses(){
-        const classData = await axios('http://localhost:3001/get_classes')
+        const classData = await axios('https://gscbackend.herokuapp.com/get_classes')
         const parsed = await parseClasses(classData['data'])
         setClasses(parsed)
         return parsed;
@@ -279,7 +279,7 @@ function Home(){
             if(classArr[i].number === 'Loading'){
 
             } else {
-                const data = await axios('http://localhost:3001/get_assignments?id=' + classArr[i].number)
+                const data = await axios('https://gscbackend.herokuapp.com/get_assignments?id=' + classArr[i].number)
                 let parsedData = await parseAssignments(classArr[i].name ,data['data'])
                 allAssignments.push(parsedData)
             }
@@ -324,7 +324,7 @@ function Home(){
 
     // Gets user's scraped class information from Gradescope
     async function pullUser(){
-        const userData = await axios('http://localhost:3001/get_name')
+        const userData = await axios('https://gscbackend.herokuapp.com/get_name')
         const parsedName = await parseUser(userData['data'])
         setUName(parsedName)
         return parsedName;
