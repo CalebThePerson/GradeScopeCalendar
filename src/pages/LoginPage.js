@@ -45,14 +45,18 @@ export default function LoginPage(){
         console.log('Logging in')
         event.preventDefault()
         if (loginMethod == "1") {
-            const message = await axios(`https://gscbackend.herokuapp.com/login?email=${email}&pass=${password}`)
-            if (message != "Successfully logged in"){
+            const message = await axios(`http://localhost:3001/login?email=${email}&pass=${password}`)
+            if (message.data != "Successfully logged in"){
                 console.log(message)
+            } else {
+                setStatus(true)
             }
         } else{
-            const message = await axios(`https://gscbackend.herokuapp.com/altlogin?email=${email}&pass=${password}`)
-            if (message != "Successfully logged in"){
+            const message = await axios(`http://localhost:3001/altlogin?email=${email}&pass=${password}`)
+            if (message.data != "Successfully logged in"){
                 console.log(message)
+            } else {
+                setStatus(true)
             }        
         }
         const userInfo = {
@@ -61,7 +65,6 @@ export default function LoginPage(){
         }
         const fileData = JSON.stringify(userInfo);
         
-        setStatus(true)
     }
 
     //React Functions and etc
